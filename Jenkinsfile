@@ -10,7 +10,7 @@ pipeline {
     stages{
         stage('Checkout'){
             steps{
-                git url: 'https://github.com/audu97/test-project', branch: 'master'
+                git url: 'https://github.com/audu97/test-project', branch: 'master',
                 credentialsId: "${GITHUB_CREDENTIALS}"
             }
         }
