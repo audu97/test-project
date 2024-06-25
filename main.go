@@ -21,9 +21,18 @@ func secondEndPointHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func thirdEndPointHandler(w http.ResponseWriter, r *http.Request) {
+	message := "second endpoint"
+	_, err := w.Write([]byte(message))
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
 func main() {
 	http.HandleFunc("/first", firstEndPointHandler)
 	http.HandleFunc("/second", secondEndPointHandler)
+	http.HandleFunc("/third", thirdEndPointHandler)
 	err := http.ListenAndServe(":8081", nil)
 	log.Fatal(err)
 }
