@@ -19,7 +19,7 @@ pipeline {
             steps{
                 echo "starting docker build"
                 script{
-                    def image = docker.build("${DOCKER_IMAGE}:${env.BUILD_ID}", "-f Dockerfile .")
+                    sh 'docker build -t ${DOCKER_IMAGE} -f Dockerfile .'
                 }
                 echo "docker build completed"
             }
