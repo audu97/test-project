@@ -17,10 +17,9 @@ pipeline {
         }
         stage('Build'){
             steps{
-
                 echo "starting docker build"
                 script{
-                     sh 'docker build -t ephraimaudu/test-app .'
+                     sh 'docker build -t ephraimaudu/test-app -f Dockerfile .'
                 }
                 echo "docker build completed"
             }
