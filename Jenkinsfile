@@ -4,12 +4,14 @@ pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
         DOCKER_IMAGE = 'ephraimaudu/test-app'
+        GITHUB_CREDENTIALS = 'git authentication'
     }
 
     stages{
         stage('Checkout'){
             steps{
                 git url: 'https://github.com/audu97/test-project', branch: 'master'
+                credentialsId: "${GITHUB_CREDENTIALS}"
             }
         }
         stage('Build'){
