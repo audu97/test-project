@@ -20,7 +20,7 @@ pipeline {
 
                 echo "starting docker build"
                 script{
-                    docker.build image: "${DOCKER_IMAGE}:${env.BUILD_ID}"
+                    docker.build image: '${DOCKER_IMAGE}:${env.BUILD_ID}', context: '.'
                 }
                 echo "docker build completed"
             }
