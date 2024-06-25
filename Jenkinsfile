@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
         DOCKER_IMAGE = 'ephraimaudu/test-app'
-        GITHUB_CREDENTIALS = 'git authentication'
+        GITHUB_CREDENTIALS = 'git-secret'
     }
 
     stages{
