@@ -20,7 +20,7 @@ pipeline {
 
                 echo "starting docker build"
                 script{
-                     sh "docker build -t ${DOCKER_IMAGE}:${env.BUILD_ID} ."
+                     sh 'docker build -t ephraimaudu/test-app .'
                 }
                 echo "docker build completed"
             }
