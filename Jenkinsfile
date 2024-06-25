@@ -18,7 +18,9 @@ pipeline {
         stage('Build'){
             steps{
                 echo "starting docker build"
-                app = docker.build("${DOCKER_IMAGE}:${env.BUILD_ID}")
+                script{
+                    app = docker.build("${DOCKER_IMAGE}:${env.BUILD_ID}")
+                }
                 echo "docker build completed"
             }
         }
