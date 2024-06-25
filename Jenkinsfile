@@ -19,17 +19,7 @@ pipeline {
             steps{
                 echo "starting docker build"
                 script{
-                    try{
-                        sh """
-                            #!/bin/bash
-                            'docker build -t ${DOCKER_IMAGE}:${env.BUILD_ID} -f Dockerfile .'
-                        """
-                        echo "docker build completed"
-                    } catch(Exception e){
-                        echo "Docker build failed"
-                        error("Docker build failed: ${e.message}")
-                    }
-
+                    sh 'docker build -t ${DOCKER_IMAGE}:${env.BUILD_ID} -f Dockerfile .'
                 }
                 echo "docker build completed"
             }
