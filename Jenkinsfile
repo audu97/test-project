@@ -10,19 +10,25 @@ pipeline {
     stages{
         stage('Checkout'){
             steps{
+                echo "checking out repo"
                 git url: 'https://github.com/audu97/test-project', branch: 'master',
                 credentialsId: "${GITHUB_CREDENTIALS}"
             }
         }
         stage('Build'){
             steps{
+
+                echo "starting docker build"
+                sh 'docker build -t ephraimaudu/test-app:8 .'
                 script{
                     docker.build("${DOCKER_IMAGE}:${env.BUILD_ID}")
                 }
+                echo "docker build completed"
             }
         }
         stage('push'){
             steps{
+                echo "pushing to docker hub"
                 script{
                     docker.withRegistry('https://index.docker.io/v1/', 'dockerhub'){
                         docker.image("${DOCKER_IMAGE}:${env.BUILD_ID}").push()
