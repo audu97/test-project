@@ -20,7 +20,7 @@ pipeline {
 
                 echo "starting docker build"
                 script{
-                    def image = docker.build("${DOCKER_IMAGE}:${env.BUILD_ID}", '.')
+                    script sh 'docker-build -t ${DOCKER_IMAGE} .'
                 }
                 echo "docker build completed"
             }
