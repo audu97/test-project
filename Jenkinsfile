@@ -1,9 +1,11 @@
 pipeline {
     agent any
-
+    tools{
+        1.22.4
+    }
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
-        DOCKER_IMAGE = 'ephraimaudu/test-app'
+//         DOCKER_IMAGE = 'ephraimaudu/test-app'
         GITHUB_CREDENTIALS = 'git-secret'
     }
 
@@ -19,7 +21,7 @@ pipeline {
             steps{
                 echo "starting docker build"
                 script{
-                    app = docker.build("${DOCKER_IMAGE}:${env.BUILD_ID}")
+                    sh 'docker build -t ephraimaudu/test-app .'
                 }
                 echo "docker build completed"
             }
