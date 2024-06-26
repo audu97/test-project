@@ -20,9 +20,15 @@ pipeline {
         }
         stage('Build'){
             steps{
-                echo "starting docker build"
                 script{
-                    sh 'docker build -t ephraimaudu/test-app . >> docker_build.log 2>&1'
+                    try{
+                        echo "starting docker build"
+                        sh 'docker build -t ephraimaudu/test-app . '
+                        echo "docker build successfully"
+                    } catch (Exception e){
+                        echo "Error during Docker build: ${e.message}"
+                        error("Docker build failed")
+                    }
                 }
                 echo "docker build completed"
             }
