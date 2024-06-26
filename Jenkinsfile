@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-       go 'go-1.22.4'
+       go 'golang-1.22.4'
     }
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
