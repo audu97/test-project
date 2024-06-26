@@ -22,7 +22,7 @@ pipeline {
             steps{
                 echo "starting docker build"
                 script{
-                    sh 'docker build -t ephraimaudu/test-app .'
+                    sh 'docker build -t ephraimaudu/test-app . >> docker_build.log 2>&1'
                 }
                 echo "docker build completed"
             }
