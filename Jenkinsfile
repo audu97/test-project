@@ -23,11 +23,10 @@ pipeline {
                 script{
                     try{
                         echo "starting docker build"
-                        sh 'docker build -t ephraimaudu/test-app . > build.log 2>&1'
+                        sh 'docker buildx build -t ephraimaudu/test-app .'
                         echo "docker build successfully"
                     } catch (Exception e){
                         echo "Error during Docker build: ${e.message}"
-                        sh 'cat build.log'
                         error("Docker build failed")
                     }
                 }
