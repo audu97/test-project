@@ -8,6 +8,7 @@ pipeline {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
         DOCKER_IMAGE = 'ephraimaudu/test-app'
         GITHUB_CREDENTIALS = 'git-secret'
+        SONAR_TOKEN = credentials('SONAR_TOKEN')
     }
 
     stages{
@@ -18,7 +19,15 @@ pipeline {
                 credentialsId: "${GITHUB_CREDENTIALS}"
             }
         }
-        stage('Build'){
+        stage('Run SonarQube Analysis') {
+            steps {
+                script {
+                    echo 'starting analysis'
+                    sh '/usr/local/sonar/bin/sonar-scanner -X -Dsonar.organization=eph-test-app -Dsonar.projectKey=eph-test-app-test-go-app -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io'
+                }
+            }
+        }
+        stage('Run Docker Build'){
             steps{
                 script{
                     try{
@@ -33,7 +42,7 @@ pipeline {
                 echo "docker build completed"
             }
         }
-        stage('push'){
+        stage('push to docker hub'){
             steps{
                 echo "pushing to docker hub"
                 script{
