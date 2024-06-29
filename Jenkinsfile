@@ -30,16 +30,10 @@ pipeline {
         stage('Run Docker Build'){
             steps{
                 script{
-                    try{
-                        echo "starting docker build"
-                        sh "docker buildx build -t ${DOCKER_IMAGE}:${env.BUILD_ID} ."
-                        echo "docker build successfully"
-                    } catch (Exception e){
-                        echo "Error during Docker build: ${e.message}"
-                        error("Docker build failed")
-                    }
+                     echo "starting docker build"
+                     sh "docker build build -t ${DOCKER_IMAGE}:${env.BUILD_ID} ."
+                     echo "docker built successfully"
                 }
-                echo "docker build completed"
             }
         }
         stage('push to docker hub'){

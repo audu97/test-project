@@ -13,11 +13,3 @@ COPY --from=builder /test-app /test-app
 EXPOSE 8081
 
 CMD ["/test-app"]
-
-#FROM golang:latest
-#
-#WORKDIR /app
-#
-#COPY ./main .
-#
-#CMD ["./main"]
